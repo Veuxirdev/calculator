@@ -1,3 +1,7 @@
+const numbersBtns = document.querySelectorAll(".number");
+const operandsBtns = document.querySelectorAll(".operand");
+const equalBtn = document.querySelector(".equal");
+
 let numberA = 0;
 let numberB = 0;
 let operator = "";
