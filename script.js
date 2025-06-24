@@ -9,57 +9,49 @@ let numberA = 0;
 let numberB = 0;
 let operator = "";
 
-deleteBtn.addEventListener("click", () => {
+const handleDelete = () => {
     const displayLength = display.textContent.length;
     display.textContent = display.textContent.slice(0,displayLength - 1);
-})
+}
 
-clearBtn.addEventListener("click", () => {
-    numberA = 0;
-    numberB = 0;
-    operator = "";
-    display.textContent = "";
-})
-
-numberBtns.forEach((button) =>{
-    button.addEventListener("click", ()=>{
+const handleNumbers = (el) => {
+        const elNode = el.target;
+        const number = elNode? elNode.textContent: el;
         if(display.textContent.length === 13){
             return;
         } else if(operator && !numberA){
             numberA = display.textContent;
             display.textContent = "";
-            display.textContent += button.textContent;
+            display.textContent += number;
         } else {
-            display.textContent += button.textContent; 
+            display.textContent += number; 
         }
-    })
-})
+}
 
-floatSignBtn.addEventListener("click", () => {
-    const displayNumber = Number(display.textContent);
-    if(Number.isInteger(displayNumber)){
+const handleOperator = (el) => {
+    const elNode = el.target;
+    const opValue = elNode? elNode.textContent: el;
+    if(!numberA && display.textContent){
+        numberA = display.textContent;
+        display.textContent = "";
+        operator = opValue;
+    } else if(!numberB && display.textContent){
+        numberB = display.textContent;
+        const result = handleFloatAndBigNum(operate(numberA,operator,numberB));
+        operator = opValue;
+        numberA = 0;
+        numberB = 0;
+        display.textContent = result;
+    } 
+}
+
+const handleFloatBtn = ()=> {
+    if(!display.textContent.includes(".")){
         display.textContent += ".";
     }
-})
+}
 
-operatorBtns.forEach((button) => {
-    button.addEventListener("click", ()=>{
-        if(!numberA && display.textContent){
-            numberA = display.textContent;
-            display.textContent = "";
-            operator = button.textContent;
-        } else if(!numberB && display.textContent){
-            numberB = display.textContent;
-            const result = handleFloatAndBigNum(operate(numberA,operator,numberB));
-            operator = button.textContent;
-            numberA = 0;
-            numberB = 0;
-            display.textContent = result;
-        } 
-    })
-})
-
-equalBtn.addEventListener("click", () =>{
+const handleEqualBtn = () =>{
     if(!numberA && operator && display.textContent){
         const result = handleFloatAndBigNum(operate(Number(display.textContent), operator, Number(display.textContent)));
         display.textContent = result;
@@ -72,7 +64,55 @@ equalBtn.addEventListener("click", () =>{
     } else if(!numberA){
         return
     }
+}
+
+document.addEventListener("keydown", (e) => {
+    const numbers = "1234567890";
+    const operators = "/*-+";
+    const isValid = "1234567890/*-+=.".includes(e.key) || e.key === "Backspace"? true:false;
+    const value = e.key;
+    if(isValid){
+        switch (true){
+        case "Backspace" === value : 
+            handleDelete();
+            break;
+        case "=" === value : 
+            handleEqualBtn();
+            break;
+        case numbers.includes(value):
+            handleNumbers(value);
+            break;
+        case operators.includes(value): 
+            handleOperator(value);
+        break;
+        case "." === value :
+            handleFloatBtn();
+        break;
+    }
+    }
 })
+
+deleteBtn.addEventListener("click", handleDelete);
+
+clearBtn.addEventListener("click", () => {
+    numberA = 0;
+    numberB = 0;
+    operator = "";
+    display.textContent = "";
+});
+
+numberBtns.forEach((button) =>{
+    button.addEventListener("click", (e) => handleNumbers(e))
+});
+
+floatSignBtn.addEventListener("click", handleFloatBtn);
+
+operatorBtns.forEach((button) => {
+    button.addEventListener("click", (e) => handleOperator(e)
+)
+});
+
+equalBtn.addEventListener("click", handleEqualBtn);
 
 const isFloat = (number) => {
     if (!Number.isInteger(Number(number))){
@@ -81,6 +121,7 @@ const isFloat = (number) => {
         return false;
     }
 }
+
 const isBigNum = (number) => {
     if(number.toString().length > 13){
         return true;
@@ -88,11 +129,12 @@ const isBigNum = (number) => {
         return false;
     }
 }
+
 const handleFloatAndBigNum = (number) =>{
     if(isFloat(number)){
-        const roundedNumber = Math.round(number);
-        if(roundedNumber < 1){
-            return roundedNumber;
+        const roundedNumber = parseFloat(number).toFixed(3);
+        if(roundedNumber === "0.000"){
+            return 0;
         }
         return parseFloat(number).toFixed(3); 
     }else if(isBigNum(number)){
