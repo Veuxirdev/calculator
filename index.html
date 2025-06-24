@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="calculator_container">
-        <p id="display">1+2</p>
+        <p id="display"></p>
         <div id="btn_container">
             <div class="numbers_btn flex-row">
                 <div class="flex-line">
@@ -28,14 +28,16 @@
                 </div>
                 <div class="flex-line">
                     <button class="number" id="num_0">0</button>
+                    <button class="float">.</button>
                 </div>
             </div>
-            <div class="operands_btn flex-column">
-                <button class="operand" id="clear">C</button>
-                <button class="operand" id="sum">+</button>
-                <button class="operand" id="substract">-</button>
-                <button class="operand" id="multiply">X</button>
-                <button class="operand" id="divide">/</button>
+            <div class="operators_btn flex-column">
+                <button class="clear" id="clear">AC</button>
+                <button class="delete" id="delete">DEL</button>
+                <button class="operator" id="sum">+</button>
+                <button class="operator" id="substract">-</button>
+                <button class="operator" id="multiply">*</button>
+                <button class="operator" id="divide">/</button>
                 <button class="equal" id="result">=</button>
             </div>
         </div>
