@@ -46,7 +46,7 @@ const handleOperator = (el) => {
 }
 
 const handleFloatBtn = ()=> {
-    if(!display.textContent.includes(".")){
+    if(!display.textContent.includes(".") && display.textContent.length < 13){
         display.textContent += ".";
     }
 }
@@ -154,6 +154,10 @@ const multiply = (a,b) =>{
     return a*b;
 }
 const divide = (a,b) =>{
+    if(b == 0){
+        alert("You can't divide by 0!");
+        return 0;
+    }
     return a/b;
 }
 

@@ -1,0 +1,83 @@
+html{
+    box-sizing: border-box;
+}
+#calculator_container{
+    width : 250px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    border-radius: 5px;
+}
+.creator{
+    color: white;
+    font-family: "Sevillana", 'Brush Script MT', cursive;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+#display_container{
+    height: 40px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    border-radius: 5px;
+}
+#display{
+    font-size: 29px;
+    font-family: monospace;
+}
+.top-btns{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+.top-btns button{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+#btn_container{
+    display: flex;
+    flex: 1;
+}
+#btn_container button, .top-btns button{
+    font-size: 30px;
+}
+.numbers_btn{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.flex-line{
+    flex: 1;
+}
+.operators_btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50px;
+}
+.operator{
+    flex:1;
+}
+.flex-line{
+    display: flex;
+}
+.flex-line .number{
+    flex: 1;
+}
+button{
+    border: 1px #dddddd solid;
+}
+button:hover{
+    background-color: #dddddd;
+    cursor: pointer;
+}

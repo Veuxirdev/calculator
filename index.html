@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sevillana&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="calculator_container">
-        <div id ="display"></div>
+        <div class="creator">Veuxir</div>
+        <div id="display_container">
+            <div id ="display"></div>
+        </div>
+        <div class="top-btns">
+            <button class="clear" id="clear">AC</button>
+            <button class="delete" id="delete">DEL</button>
+        </div>
         <div id="btn_container">
-            <div class="numbers_btn flex-row">
+            <div class="numbers_btn flex-column">
                 <div class="flex-line">
                     <button class="number" id="num_1">1</button>
                     <button class="number" id="num_2">2</button>
@@ -32,8 +42,6 @@
                 </div>
             </div>
             <div class="operators_btn flex-column">
-                <button class="clear" id="clear">AC</button>
-                <button class="delete" id="delete">DEL</button>
                 <button class="operator" id="sum">+</button>
                 <button class="operator" id="substract">-</button>
                 <button class="operator" id="multiply">*</button>
